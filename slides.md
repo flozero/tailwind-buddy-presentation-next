@@ -38,7 +38,7 @@ overviewSnapshots: true
 
 # About me
 
-Hey I am Florent. Working at busbud a year and half and I am going to present you why you may want to use tailwind buddy to build your next react component library.
+Hey I am Florent. Working at busbud for a year and half.
 
 - <carbon-logo-github /> **https://github.com/flozero**
   <br>
@@ -56,6 +56,10 @@ h1 {
 }
 </style>
 
+<!--
+and I am going to present you why you may want to use tailwind buddy to build your next react component library.
+-->
+
 ---
 
 # Context
@@ -63,51 +67,92 @@ h1 {
 ## What is Busbud
 
 - We serve millions of users
-- We are in multiple countries 80+
-- We have more than 10m+ landing pages
+- We operate in over 80 countries
+- We have more than 10 million landing pages
 
 ## What was our main issue
 
-- We had issues in terms of performance across the app. And the old design system was not a good fit for building whitelabels
+- We faced performance issues across the app, and our old design system wasn’t a good fit for building white-label products.
 
 ---
 
 # We decided to create a new design system (Horizon)
 
 We wanted:
-- Something that would provide us speed. and what better than css and classes ?
-- Somehing super Devx friendly 
-- Something with 1 to 1 figma parity as much as possible
-- SSR friendly. That mean the components should support an api to define component props accross responsivness. Like size width for example so when the componnet are rendered from server to frontend there is no flickering effect visually of the page.
+
+- Something that would offer speed—what’s better than CSS and utility classes?
+- Something very developer-friendly (DevX)
+- Framework agnostic
+- 1:1 Figma parity as much as possible
+- SSR-friendly, meaning components should support an API to define props across responsiveness (e.g., size or width), so there’s no flicker when transitioning from server to client rendering.
 
 <br>
 <br>
+
 <div v-click>
-After many iteration we have decided to use tailwind as the best fit for our problems. So now do we use an existing tools to build the component library
+After many iterations, we decided to use TailwindCSS as the best fit for our needs. Now, should we use existing tools to build the component library 
 </div>
 
 ---
 
 # Why we choose to build tailwind buddy ?
 
-We found problems with other libraries like CVA or tailwind-variants:
-- None are handling responsivness or not properly
-  - fun fact tailwind-variants is used by NEXT UI but they are not even using the latest version that is suppose to support responsivness
-- They don’t support random props value for compound variants. We will see later what it is
+We encountered issues with other libraries like CVA or tailwind-variants:
+
+- They didn’t handle responsiveness well, or at all.
+  - Fun fact: Tailwind-variants is used by NEXT UI, but they aren’t even using the latest version, which supposedly supports responsiveness.
+- They don’t support random prop values for compound variants. We’ll dive into what that means later.
 
 <br>
 <br>
 <div v-click>
-So that's why we have decided to build our own internal tools
+That’s why we decided to build our own internal tool.
 </div>
 
 ---
 
-# Example usage
+# Simple Example
+
+```ts
+import { compose } from "../../utils/tailwind-buddy";
+
+export const ButtonVariants = compose({
+  slots: {
+    root: /** @tw */ "rounded-3xl",
+    label: /** @tw */ "uppercase font-extrabold",
+  },
+  variants: {
+    variant: {
+      primary: {
+        root: /** @tw */ "bg-surface-primary-cta",
+        label: /** @tw */ "text-surface-primary-text",
+      },
+    },
+    size: {
+      small: "w-auto px-2 py-1",
+    },
+  },
+  defaultVariants: {
+    variant: "primary",
+    size: "small",
+  },
+  responsiveVariants: ["size"],
+})<ButtonBaseProps>();
+
+export type ButtonProps = VariantsProps<typeof ButtonVariants>;
+```
 
 ---
 
 # A bit more complex usage
+
+<!-- show horizon vscode -->
+
+---
+
+# Is it more performant than other tools?
+
+![Perf](./public/perf.png)
 
 ---
 
@@ -129,6 +174,23 @@ So that's why we have decided to build our own internal tools
 
 # What else ?
 
+- With React Native + Expo’s new architecture, which better supports native iOS/Android + web, and thanks to NativeWind…
+
+We can now build for iOS, Android, and web from a single codebase!
+
+<!-- show the app running -->
+
 ---
 
 # Thank you
+
+Me:
+
+- <carbon-logo-github /> **https://github.com/flozero**
+  <br>
+- <carbon-logo-linkedin/> **https://www.linkedin.com/in/fgiraud42/**
+
+Links:
+
+- <carbon-logo-github /> **https://github.com/flozero/tailwind-buddy-presentation-react-native**
+- <carbon-logo-github /> **https://busbud.github.io/tailwind-buddy/**
